@@ -6,12 +6,10 @@ import { RoleGuard } from './guards/role.guard';
 import { JwtGuard } from './guards/jwt.guard';
 import { JwtStrategy } from './guards/jwt.stradegy';
 import { UserModule } from 'src/user/user.module';
-import { BlogModule } from 'src/blog/blog.module';
 import { UserIsAuthorGuard } from './guards/user-is-author-guard';
 
 @Module({
   imports: [
-    forwardRef(() => BlogModule),
     forwardRef(()=>UserModule),
     JwtModule.registerAsync({
       imports: [ConfigModule],

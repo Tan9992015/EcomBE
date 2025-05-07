@@ -2,13 +2,22 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { UserEntity } from './user/user.entity';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './user/user.module';
-import { BlogModule } from './blog/blog.module';
+import { ResetTokenModule } from './resetToken/resetToken.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ProductModule } from './product/product.module';
+import { OrderModule } from './order/order.module';
+import { OrderProductModule } from './orderProduct/orderProduct.module';
+import { MailModule } from './mail/mail.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot({isGlobal:true}),
+    ServeStaticModule.forRoot({
+      rootPath:join(__dirname,'..','public'), // trỏ tới thư mục public
+    }),
     TypeOrmModule.forRoot({
     type:'mysql',
     host:'localhost',
@@ -20,7 +29,12 @@ import { BlogModule } from './blog/blog.module';
     synchronize:true,
   }),
   UserModule,
-  BlogModule
+  ResetTokenModule,
+  ProductModule,
+  OrderModule,
+  OrderProductModule,
+  AuthModule,
+  MailModule,
 ],
   controllers: [AppController],
   providers: [AppService],

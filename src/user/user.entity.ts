@@ -1,4 +1,5 @@
-import { BlogEntity } from "src/blog/blog-entity";
+// import { BlogEntity } from "src/blog/blog-entity";
+import { OrderEntity } from "src/order/order.entity";
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum UserRole {
@@ -34,6 +35,6 @@ export class UserEntity {
         this.email = this.email.toLowerCase()
     }
 
-    @OneToMany(type => BlogEntity,blog => blog.author)
-    blogs:BlogEntity[]
+    @OneToMany(()=>OrderEntity,order =>  order.user)
+    order:OrderEntity
 }

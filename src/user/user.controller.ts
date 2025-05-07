@@ -25,9 +25,31 @@ import { diskStorage } from 'multer';
 import * as path from 'path';
 import {v4 as uuidv4} from 'uuid'
 import { join } from 'path';
+import { ChangePassworDto} from './changePassword.dto';
+import { MailService } from 'src/mail/mail.service';
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService,
+  ) {}
+
+  // change password 
+  @UseGuards(JwtGuard)
+  @Put('/changepassword')
+  async changePassword(@Req() req, @Body() changePasswordDto:ChangePassworDto):Promise<string>{
+    const userId = Number(req.user.id) || 0
+    return await this.userService.changePassword(userId,changePasswordDto)
+  } 
+
+  // forgot passwoed
+  @Post('/forgot-password')
+  async forgotPassword(@Body('email') email:string):Promise<any>{
+    return await this.userService.forgotPassword(email)
+  }
+// reset password
+@Post('/reset-password')
+async resetPassword(@Body('token') token:string,@Body('newPassword') newPassword:string):Promise<any>{
+  return await this.userService.resetPassword(token,newPassword)
+}
 
   @Post('/create')
   async create(@Body() user: User): Promise<string> {

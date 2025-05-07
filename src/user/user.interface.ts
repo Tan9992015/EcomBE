@@ -1,4 +1,4 @@
-import { Blog } from "src/blog/blog-interface"
+// import { Blog } from "src/blog/blog-interface"
 import { UserRole } from "./user.entity"
 
 export interface User {
@@ -9,5 +9,4 @@ export interface User {
     password?:string
     role?:UserRole
     profileImage?:string,
-    blogs?:Blog[]
 }

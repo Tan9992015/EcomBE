@@ -1,0 +1,10 @@
+import { OrderProductDto } from "src/orderProduct/orderProduct.dto";
+
+export class ProductDto {
+        id?:number
+        price?: number
+        description?: string
+        imageUrl?: string
+        addedProperty?: Record<string, any>
+        orderProduct?:OrderProductDto[]
+}
