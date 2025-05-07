@@ -12,8 +12,8 @@ export class MailService {
         port: 465,
         secure: true,
         auth: {
-          user:"tan26102003@gmail.com",
-          pass:"ebliljxnzvfwoowc",
+          user:"abcdef",
+          pass:"abcdef",
         }
         })
     }
