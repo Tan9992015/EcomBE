@@ -1,6 +1,7 @@
 import { OrderProductDto } from "src/orderProduct/orderProduct.dto";
 
 export class ProductDto {
+        name?:string
         id?:number
         price?: number
         description?: string

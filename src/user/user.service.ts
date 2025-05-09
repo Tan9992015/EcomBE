@@ -144,10 +144,10 @@ async updatedOneByEmail(email:string| undefined,user:User):Promise<any>{
         currentPage: Number(options.page)
       },
       links: {
-        first:options.route + `?limit=${options.limit}`,
-        previous:Number(options.page) > 1 ? options.route + `?page=${Number(options.page)-1}` + `?limit=${options.limit}` : '',
-        next: options.route + `?page=${Number(options.page)+1}` + `?limit=${options.limit}`,
-        last:options.route + `?page=${Math.ceil(totalUsers/Number(options.limit))}`
+        first:options.route + `?limit=${options.limit}` + `&userName=${user.userName}`,
+        previous:Number(options.page) > 1 ? options.route + `?page=${Number(options.page)-1}` + `&limit=${options.limit}` + `&userName=${user.userName}` : '',
+        next: options.route + `?page=${Number(options.page)+1}` + `&limit=${options.limit}` + `&userName=${user.userName}`,
+        last:options.route + `?page=${Math.ceil(totalUsers/Number(options.limit))}` + `&userName=${user.userName}`
       }
     }
     return userPageable
