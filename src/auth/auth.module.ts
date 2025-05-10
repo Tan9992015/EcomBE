@@ -10,7 +10,7 @@ import { UserIsAuthorGuard } from './guards/user-is-author-guard';
 
 @Module({
   imports: [
-    forwardRef(() => UserModule),
+    forwardRef(()=>UserModule),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
