@@ -25,6 +25,12 @@ export class ProductEntity {
     addedProperty:Record<string,any>
     // record tương đương với obj: { [key: string]: any } = { ... }
 
+    @Column()
+    sold:number
+
+    @Column()
+    countInStock:number
+
     @CreateDateColumn()
     createdAt:Date 
 

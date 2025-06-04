@@ -26,6 +26,9 @@ export class ProductService {
         return await this.productRepository.findOne({where:{id}})
     }
 
+    async findProductByName(name:string):Promise<any> {
+        return await this.productRepository.findOne({where:{name}})
+    }
     async updateProduct(id:number,options:ProductDto):Promise<any>{
         return await this.productRepository.update(id,options)
     }

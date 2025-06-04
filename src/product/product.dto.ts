@@ -7,5 +7,6 @@ export class ProductDto {
         description?: string
         imageUrl?: string
         addedProperty?: Record<string, any>
-        orderProduct?:OrderProductDto[]
+        sold?:number
+        countInStock?:number
 }
