@@ -12,30 +12,32 @@ import { OrderModule } from './order/order.module';
 import { OrderProductModule } from './orderProduct/orderProduct.module';
 import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentModule } from './comment/comment.module';
 @Module({
   imports: [
-    ConfigModule.forRoot({isGlobal:true}),
+    ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({
-      rootPath:join(__dirname,'..','public'), // trỏ tới thư mục public
+      rootPath: join(__dirname, '..', 'public'), // trỏ tới thư mục public
     }),
     TypeOrmModule.forRoot({
-    type:'mysql',
-    host:'localhost',
-    port:3306,
-    username:'root',
-    password:'Tan9992015',
-    database:'demo',
-    autoLoadEntities: true,
-    synchronize:true,
-  }),
-  UserModule,
-  ResetTokenModule,
-  ProductModule,
-  OrderModule,
-  OrderProductModule,
-  AuthModule,
-  MailModule,
-],
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'Tan9992015',
+      database: 'demo',
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+    UserModule,
+    ResetTokenModule,
+    ProductModule,
+    OrderModule,
+    OrderProductModule,
+    AuthModule,
+    MailModule,
+    CommentModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
