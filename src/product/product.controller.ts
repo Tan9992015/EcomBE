@@ -6,6 +6,8 @@ import * as path from 'path'
 import {v4 as uuidv4} from 'uuid'
 import { diskStorage } from "multer"
 import {join} from 'path'
+import * as qr from 'qrcode'
+import { OrderDto } from "src/order/dto/order.dto"
 @Controller('product')
 export class  ProductController {
     constructor(private readonly productService:ProductService) {}
@@ -78,4 +80,5 @@ export class  ProductController {
         if(!foundProduct) return 'product id not found'
         return await res.sendFile(join(process.cwd(),`/uploads/productImage/${foundProduct.imageUrl}`))
     }
+ 
 }

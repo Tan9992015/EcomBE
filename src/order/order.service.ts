@@ -139,4 +139,19 @@ export class OrderService {
         if(!foundOrder) return "order not found"
         return await this.OrderRepository.update(id,orderDto)
     }
+    async getQrCode(id:number):Promise<any>{
+        const foundOrder = await this.OrderRepository.findOne({where:{ id }})
+        if(!foundOrder) return "k tim thay id don hang"
+        const bankInfo = {
+            accountNumber: '00002075261',
+            bankCode: 'TPB', 
+            accountName: 'NGUYEN TRONG TAN',
+            amount: foundOrder.totalPrice,
+            message: 'Thanh toan don hang #1234'
+        };
+
+        // Tạo nội dung QR theo chuẩn URL của VietQR (https://vietqr.net)
+       const qrUrl = `https://img.vietqr.io/image/${bankInfo.bankCode}-${bankInfo.accountNumber}-qr-only.png?amount=${bankInfo.amount}&addInfo=${bankInfo.message}`;
+        return qrUrl
+    }
 }

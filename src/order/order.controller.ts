@@ -22,4 +22,8 @@ export class OrderController {
     async updateOrder(@Body() orderDto:OrderDto,@Param('id') id:string){
         return await this.orderService.updateOrder(Number(id),orderDto)
     }
+    @Get('qrcode/:id')
+    async getQrCode(@Param('id') id:string){
+        return await this.orderService.getQrCode(Number(id))
+    }
 }
