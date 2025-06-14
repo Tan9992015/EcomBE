@@ -19,12 +19,10 @@ import { RoleGuard } from '../auth/guards/role.guard';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Post()
-  @hasRoles(UserRole.ADMIN)
-  @UseGuards(JwtGuard, RoleGuard)
+  @Post('create')
   async create(@Body() category: Category) {
     return await this.categoryService.createCategory(category);
-  }
+  }s
 
   @Get()
   async findAll() {

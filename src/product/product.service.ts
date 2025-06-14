@@ -4,22 +4,45 @@ import { Between, Like, Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 import { ProductDto } from "./product.dto";
 import { IPaginationOptions, paginate, Pagination } from "nestjs-typeorm-paginate";
+import { CategoryService } from "src/category/category.service";
+import { CategoryEntity } from "src/category/category.entity";
 
 @Injectable()
 export class ProductService {
     constructor(@InjectRepository(ProductEntity)
-                private readonly productRepository:Repository<ProductEntity>
+                private readonly productRepository:Repository<ProductEntity>,
+                private readonly categoryService:CategoryService
             ){}
 
     async createProduct(product:ProductDto):Promise<any> {
-        const newProduct = new ProductEntity()
-        newProduct.name = product?.name ?? ''
-        newProduct.price = product?.price ?? 0
-        newProduct.description = product?.description ?? ''
-        newProduct.addedProperty = product?.addedProperty ?? {}
-        newProduct.imageUrl = 'testingimageurl.123'
+       let categoryEntity: CategoryEntity | null = null;
+        
+        if (product.category?.id) {
+            categoryEntity = await this.categoryService.findOne(product.category.id);
+        } else {
+            // Nếu không có category được chỉ định, tìm category mặc định
+            categoryEntity = await this.categoryService.findOne(1); // category có id = 1
+        }
 
-        return await this.productRepository.save(newProduct)
+        if (!categoryEntity) {
+           return 'khong tim thay category'
+        }
+
+        // Tạo product mới
+        const newProduct = new ProductEntity();
+        newProduct.name = product?.name ?? '';
+        newProduct.price = product?.price ?? 0;
+        newProduct.description = product?.description ?? '';
+        newProduct.addedProperty = product?.addedProperty ?? {};
+        newProduct.imageUrl = product?.imageUrl ?? 'default-image-url';
+        newProduct.sold = product?.sold ?? 0;
+        newProduct.countInStock = product?.countInStock ?? 0;
+        
+        // Gán category entity đã tìm được
+        newProduct.category = categoryEntity;
+
+        // Lưu product vào database
+        return await this.productRepository.save(newProduct);
     }
 
     async findProductById(id:number):Promise<any> {

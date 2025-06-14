@@ -1,3 +1,4 @@
+import { Category } from "src/category/category.interface";
 import { OrderProductDto } from "src/orderProduct/orderProduct.dto";
 
 export class ProductDto {
@@ -9,4 +10,5 @@ export class ProductDto {
         addedProperty?: Record<string, any>
         sold?:number
         countInStock?:number
+        category?:Category
 }

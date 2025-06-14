@@ -13,6 +13,7 @@ import { OrderProductModule } from './orderProduct/orderProduct.module';
 import { MailModule } from './mail/mail.module';
 import { AuthModule } from './auth/auth.module';
 import { CommentModule } from './comment/comment.module';
+import { CategoryModule } from './category/category.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -37,6 +38,7 @@ import { CommentModule } from './comment/comment.module';
     AuthModule,
     MailModule,
     CommentModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
